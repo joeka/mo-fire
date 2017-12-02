@@ -19,10 +19,10 @@ public class Player : KinematicBody2D
            movement.y += 1;
        }
        if(Input.IsActionPressed("move_right")) {
-           movement.x += 1;
+           movement.x += 2;
        }
        if(Input.IsActionPressed("move_left")) {
-           movement.x -= 1;
+           movement.x -= 2;
        }
 
         this.MoveAndCollide(movement.Normalized() * delta * speed);

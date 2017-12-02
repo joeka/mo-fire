@@ -1,9 +1,77 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://World.cs" type="Script" id=1]
 [ext_resource path="res://tiles.tres" type="TileSet" id=2]
-[ext_resource path="res://Player.cs" type="Script" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Assets/shadow.png" type="Texture" id=3]
+[ext_resource path="res://Player.cs" type="Script" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
+
+[sub_resource type="Gradient" id=1]
+
+offsets = PoolRealArray( 0, 0.17341, 0.300578, 0.586705, 0.786127, 0.971098 )
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0.352941, 0, 1, 1, 0.430166, 0, 1, 1, 0.603922, 0, 1, 1, 0.807843, 0, 1, 1, 0.887537, 0.0245211, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+
+gradient = SubResource( 1 )
+width = 2048
+
+[sub_resource type="Curve" id=3]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.992556, 0.446289 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+
+width = 2048
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 1
+emission_sphere_radius = 10.0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 180.0
+flatness = 0.0
+gravity = Vector3( 0, -98, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 1.0
+angular_velocity = 10.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = -15.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 3.0
+scale_random = 0.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+
+[sub_resource type="RectangleShape2D" id=6]
+
+custom_solver_bias = 0.0
+extents = Vector2( 29.7122, 28.3223 )
 
 [node name="World" type="Node2D"]
 
@@ -28,7 +96,54 @@ collision_layer = 1
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
-tile_data = PoolIntArray( -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -196612, 0, 0, -196611, 1, 0, -196610, 1, 0, -196609, 1, 0, -262144, 1, 0, -262143, 1, 0, -262142, 1, 0, -262141, 0, 0, -131076, 0, 0, -131075, 1, 0, -131074, 2, 0, -131073, 2, 0, -196608, 2, 0, -196607, 2, 0, -196606, 1, 0, -196605, 0, 0, -65540, 0, 0, -65539, 1, 0, -65538, 2, 0, -65537, 2, 0, -131072, 2, 0, -131071, 2, 0, -131070, 1, 0, -131069, 0, 0, -4, 0, 0, -3, 1, 0, -2, 2, 0, -1, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 1, 0, -65533, 0, 0, 65532, 0, 0, 65533, 1, 0, 65534, 2, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 1, 0, 3, 0, 0, 131068, 0, 0, 131069, 1, 0, 131070, 1, 0, 131071, 1, 0, 65536, 1, 0, 65537, 1, 0, 65538, 1, 0, 65539, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0 )
+tile_data = PoolIntArray( -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -196612, 0, 0, -196611, 2, 0, -196610, 2, 0, -196609, 2, 0, -262144, 2, 0, -262143, 2, 0, -262142, 2, 0, -262141, 0, 0, -131076, 0, 0, -131075, 2, 0, -131074, 2, 0, -131073, 2, 0, -196608, 2, 0, -196607, 2, 0, -196606, 2, 0, -196605, 0, 0, -65540, 0, 0, -65539, 2, 0, -65538, 2, 0, -65537, 2, 0, -131072, 2, 0, -131071, 2, 0, -131070, 2, 0, -131069, 0, 0, -4, 0, 0, -3, 2, 0, -2, 2, 0, -1, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, -65533, 0, 0, 65532, 0, 0, 65533, 1, 0, 65534, 1, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 0, 0, 131068, 0, 0, 131069, 1, 0, 131070, 1, 0, 131071, 2, 0, 65536, 2, 0, 65537, 2, 0, 65538, 2, 0, 65539, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+position = Vector2( 61.5277, 187.398 )
+emitting = true
+amount = 200
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.06
+randomness = 0.8
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 5 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+
+[node name="Light2D" type="Light2D" parent="Particles2D"]
+
+position = Vector2( -0.663361, -1.9903 )
+enabled = true
+editor_only = false
+texture = ExtResource( 3 )
+offset = Vector2( 0, 0 )
+texture_scale = 0.5
+color = Color( 1, 1, 1, 1 )
+energy = 0.5
+mode = 0
+range_height = 0.0
+range_z_min = -1024
+range_z_max = 1024
+range_layer_min = 0
+range_layer_max = 0
+range_item_cull_mask = 1
+shadow_enabled = false
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_buffer_size = 2048
+shadow_gradient_length = 0.0
+shadow_filter = 0
+shadow_filter_smooth = 0.0
+shadow_item_cull_mask = 1
 
 [node name="Player" type="KinematicBody2D" parent="."]
 
@@ -36,11 +151,15 @@ input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 speed = 300.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+
+shape = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
 
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 
