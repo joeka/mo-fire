@@ -4,9 +4,10 @@ using System;
 public class Player : KinematicBody2D
 {
     [Export] private float speed = 300;
-
+    private WaterCannon waterCannon;
+    
     public override void _Ready() {
-        
+        waterCannon = (WaterCannon) FindNode("WaterCannon");
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -25,7 +26,11 @@ public class Player : KinematicBody2D
            movement.x -= 2;
        }
 
-        this.MoveAndCollide(movement.Normalized() * delta * speed);
+        if(movement.Length() > 0) {
+            movement = movement.Normalized();
+            waterCannon.LookAt(GetGlobalPosition() + movement);
+            MoveAndCollide(movement * delta * speed);
+        }
     }
 
    public override void _Process(float delta) {
