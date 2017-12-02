@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/tileset.png" type="Texture" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Red" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 128, 64 )
+
+[node name="Green" type="Sprite" parent="."]
+
+position = Vector2( -136, 1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 128, 64 )
+
+[node name="Blue" type="Sprite" parent="."]
+
+position = Vector2( 135, -1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 256, 0, 128, 64 )
+
+
