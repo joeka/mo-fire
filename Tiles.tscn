@@ -4,7 +4,7 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Wand" type="Sprite" parent="."]
+[node name="Red" type="Sprite" parent="."]
 
 texture = ExtResource( 1 )
 region_enabled = true

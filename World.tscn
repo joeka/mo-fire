@@ -38,6 +38,8 @@ tile_data = PoolIntArray( -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 
 
 [node name="Faia" parent="." instance=ExtResource( 3 )]
 
+position = Vector2( 61.5277, 187.398 )
+
 [node name="Player" type="KinematicBody2D" parent="."]
 
 input_pickable = false
