@@ -21,8 +21,8 @@ public class Faia : Particles2D
         var mat = (ParticlesMaterial)ProcessMaterial;
 
         var gradient = new Gradient();
-        gradient.AddPoint(2048*0.0f, new Color(255, 0, 0));
-        gradient.AddPoint(2048*0.2f, new Color(255, 90, 0));
+        gradient.AddPoint(2048*0.0f, new Color(255,   0, 0));
+        gradient.AddPoint(2048*0.2f, new Color(255,  90, 0));
         gradient.AddPoint(2048*0.4f, new Color(255, 109, 0));
         gradient.AddPoint(2048*0.6f, new Color(255, 154, 0));
         gradient.AddPoint(2048*0.8f, new Color(255, 206, 0));
@@ -31,6 +31,13 @@ public class Faia : Particles2D
         var gradientTex = new GradientTexture();
         gradientTex.SetGradient(gradient);
         gradientTex.SetWidth(2048);
+
+        var scale = new Curve();
+        scale.AddPoint(new Vector2(0.0f, 1.0f));
+        scale.AddPoint(new Vector2(1.0f, 0.5f));
+
+        var scaleTex = new CurveTexture();
+        scaleTex.SetCurve(scale);
 
         var matCopy = new ParticlesMaterial() {
             EmissionShape         = ParticlesMaterial.EMISSION_SHAPE_SPHERE,
@@ -44,7 +51,7 @@ public class Faia : Particles2D
             RadialAccel           = -15,
             Scale                 = 3,
             ColorRamp             = gradientTex,
-            ScaleCurve            = mat.ScaleCurve
+            ScaleCurve            = scaleTex
         };
 
         this.ProcessMaterial = matCopy;

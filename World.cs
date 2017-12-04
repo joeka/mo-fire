@@ -9,7 +9,8 @@ public class World : Node2D
         Empty = -1,
         Wall = 0,
         Heater = 1,
-        Generic = 2
+        Generic = 2,
+        Wood = 5
     }
 
     private struct FireLocation {
@@ -51,6 +52,24 @@ public class World : Node2D
 
     private CellInfo[,] _grid;
 	
+
+    private Dictionary<CellTypes, double> _typeToCoeff = new Dictionary<CellTypes, double>() {
+        { CellTypes.Empty,   0   },
+        { CellTypes.Generic, 0.8 },
+        { CellTypes.Heater,  2   },
+        { CellTypes.Wall,    0   },
+        { CellTypes.Wood,    2   }
+    };
+
+    private double GetCoeff(CellTypes t) {
+        if (_typeToCoeff.ContainsKey(t)) {
+            return _typeToCoeff[t];
+        } else {
+            Console.WriteLine($"Can't find Cell type: {t}");
+            return 0;
+        }
+    }
+
 
     public override void _Ready() {
         _map = (TileMap)FindNode("TileMap");
@@ -110,10 +129,10 @@ public class World : Node2D
         for (int x = 1; x < _grid.GetLength(0)-1; x++) {
             for (int y = 1; y < _grid.GetLength(1)-1; y++) {
                 if (_grid[x,y].HasFire) {
-                    _grid[x-1,y].Heat += 1.2 * delta*10;        // increase Heat by x every 100ms
-                    _grid[x+1,y].Heat += 1.2 * delta*10;
-                    _grid[x,y-1].Heat += 1.2 * delta*10;
-                    _grid[x,y+1].Heat += 1.2 * delta*10;
+                    _grid[x-1,y].Heat += GetCoeff(_grid[x-1,y].CellType) * delta*10;        // increase Heat by x every 100ms
+                    _grid[x+1,y].Heat += GetCoeff(_grid[x+1,y].CellType) * delta*10;
+                    _grid[x,y-1].Heat += GetCoeff(_grid[x,y-1].CellType) * delta*10;
+                    _grid[x,y+1].Heat += GetCoeff(_grid[x,y+1].CellType) * delta*10;
                 }
             }
         }

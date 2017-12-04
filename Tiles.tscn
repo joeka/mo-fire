@@ -6,6 +6,7 @@
 
 [node name="Wall" type="Sprite" parent="."]
 
+editor/display_folded = true
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 128, 64 )
@@ -38,5 +39,12 @@ position = Vector2( 135, -1 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 256, 0, 128, 64 )
+
+[node name="Wood" type="Sprite" parent="."]
+
+position = Vector2( 264.942, -0.794426 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 386, 0, 128, 64 )
 
 

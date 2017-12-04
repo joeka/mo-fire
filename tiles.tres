@@ -74,4 +74,13 @@ points = PoolVector2Array( -0.579071, -32.7418, 64.0272, -0.116753, 0.27948, 31.
 "shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 64, 32 )
 } ]
+5/name = "Wood"
+5/texture = ExtResource( 1 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 386, 0, 128, 64 )
+5/is_autotile = false
+5/occluder_offset = Vector2( 64, 32 )
+5/navigation_offset = Vector2( 64, 32 )
+5/shapes = [  ]
 
