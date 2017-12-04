@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://Assets/figure.png" type="Texture" id=2]
 [ext_resource path="res://WaterCannon.cs" type="Script" id=3]
+[ext_resource path="res://Assets/wusch.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -126,5 +127,13 @@ audio_bus_name = "Master"
 rotation = -3.14159
 build_mode = 0
 polygon = PoolVector2Array( 0, 20, -100, 30, -100, -30, 0, -20 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WaterCannon"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 

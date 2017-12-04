@@ -8,11 +8,14 @@ public class WaterCannon : Particles2D {
     private CollisionPolygon2D collisionPolygone;
 
     private Area2D area;
+    private AudioStreamPlayer _player;
     private bool shooterizing = false;
 
     public override void _Ready() {
         collisionPolygone = (CollisionPolygon2D) FindNode("CollisionPolygon2D");
         area = (Area2D) FindNode("Area2D");
+
+        _player = (AudioStreamPlayer) FindNode("AudioStreamPlayer");
     }
 
     public override void _Input(InputEvent inputEvent) {
@@ -20,6 +23,12 @@ public class WaterCannon : Particles2D {
             bool isPressed = inputEvent.IsPressed();
             Emitting = isPressed;
             shooterizing = isPressed;
+
+            if (isPressed && !_player.IsPlaying()) {
+                _player.Play();
+            } else if (!isPressed && _player.IsPlaying()) {
+                _player.Stop();
+            }
         }
     }
 

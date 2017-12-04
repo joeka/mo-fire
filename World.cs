@@ -94,6 +94,9 @@ public class World : Node2D
 
     private CellInfo[,] _grid;
 	
+    private AudioStreamPlayer _player;
+
+
     private Dictionary<CellTypes, double> _cellTypeToHeatIncrease = new Dictionary<CellTypes, double>() {
         { CellTypes.Empty,   0.0 },
         { CellTypes.Ground,  0.8 },
@@ -138,6 +141,9 @@ public class World : Node2D
                 _grid[p.X, p.Y].Heat = 100;
             }
         }
+
+        _player = (AudioStreamPlayer) FindNode("FireSound");
+        _player.Play();
     }
 
     public void RemoveFire(Faia fire) {
@@ -153,6 +159,7 @@ public class World : Node2D
         FlatGrid().Where(ShouldBurn).ForEach(SpawnFaia);
 
         if (FlatGrid().Where(IsNotWall).All(IsBurning)) {
+            _player.Stop();
             Levelator.Instance.NextLevel(this, false);
         }
 

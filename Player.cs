@@ -8,7 +8,7 @@ public class Player : KinematicBody2D
     private Sprite _sprite;
     private Texture _goLeft;
     private Texture _goRight;
-    
+
     public override void _Ready() {
         waterCannon = (WaterCannon) FindNode("WaterCannon");
         _sprite = (Sprite) FindNode("Sprite");

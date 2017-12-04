@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Faia.cs" type="Script" id=1]
 [ext_resource path="res://Assets/shadow.png" type="Texture" id=2]
+[ext_resource path="res://Assets/zisch.wav" type="AudioStream" id=3]
 
 [sub_resource type="Gradient" id=1]
 
@@ -132,5 +133,13 @@ audio_bus_name = "Master"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
 shape = SubResource( 6 )
+
+[node name="ExtinguishSound" type="AudioStreamPlayer" parent="."]
+
+stream = ExtResource( 3 )
+volume_db = -3.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 

@@ -10,6 +10,7 @@ public class Faia : Particles2D
 
     private bool _flacker;
     private float _flackerTimeCount;
+    private AudioStreamPlayer _sound;
 
     public int CellIndex{get;set;}
     public World.Point CellPos {get;set;}
@@ -19,6 +20,8 @@ public class Faia : Particles2D
         _light = (Light2D)GetNode("Light2D");
 
         var mat = (ParticlesMaterial)ProcessMaterial;
+
+        _sound = (AudioStreamPlayer)FindNode("ExtinguishSound");
 
         var gradient = new Gradient();
         gradient.AddPoint(2048*0.0f, new Color(255,   0, 0));
@@ -84,6 +87,13 @@ public class Faia : Particles2D
             if (!_flacker) {
                 _flacker = true;
                 _flackerTimeCount = 0;
+            }
+            if (_sound.IsPlaying() && _sound.GetPlaybackPosition() > 0.2) {
+                _sound.Seek(0);
+            } else {
+                if (!_sound.IsPlaying()) {
+                    _sound.Play();
+                }
             }
         }
    }
