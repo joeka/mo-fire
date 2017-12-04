@@ -61,7 +61,7 @@ public class Faia : Particles2D
         _flackerTimeCount += delta;
 
         if (_flacker) {
-            if (_flackerTimeCount > 1.5) {
+            if (_flackerTimeCount > 1) {
                 _flacker = false;
                 _flackerTimeCount = 0;
             }
@@ -81,8 +81,10 @@ public class Faia : Particles2D
             _flacker = false;
         } else {
             mat.Gravity = new Vector3(0, newAmount, 0);
-            _flacker = true;
-            _flackerTimeCount = 0;
+            if (!_flacker) {
+                _flacker = true;
+                _flackerTimeCount = 0;
+            }
         }
    }
 

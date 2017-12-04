@@ -26,14 +26,14 @@ bounce = 0.0
 build_mode = 0
 polygon = PoolVector2Array( -0.579071, -32.7418, 64.0272, -0.116753, 0.27948, 31.4352, -63.6829, -0.33139 )
 
-[node name="Green" type="Sprite" parent="."]
+[node name="Heater" type="Sprite" parent="."]
 
 position = Vector2( -136, 1 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 128, 0, 128, 64 )
 
-[node name="Blue" type="Sprite" parent="."]
+[node name="Ground" type="Sprite" parent="."]
 
 position = Vector2( 135, -1 )
 texture = ExtResource( 1 )
