@@ -15,7 +15,7 @@ public class Splash : Node2D
 
     public override void _Input(InputEvent @event) {
         if (@event is InputEventKey) {
-            GetTree().ChangeScene("res://World.tscn");
+            GetTree().ChangeScene("res://Level1.tscn");
         }
     }
 

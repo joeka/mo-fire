@@ -4,21 +4,50 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-public class Settings {
+public class Levelator {
 
     // ---------------------------------------------------
     // SINGLETON
 
-    private static Settings _settings;
-    public static Settings Instance => _settings ?? (_settings = new Settings());
+    private static Levelator _levelator;
+    public static Levelator Instance => _levelator ?? (_levelator = new Levelator());
 
     // ---------------------------------------------------
 
-    private Settings() {}
+    private Levelator() {}
 
-    public string SceneAfterNextScene {get;set;}
+    private readonly string[] Levels = new string[]{"Level1", "Level2", "Level3", "Level4", "Level5"};
+    private int _currentLevelId = 0;
+    private int _nextLevelId = -1;
 
+    public void NextLevel(Node node, bool won=true) {
+        if(_currentLevelId >= 0) {
+            if(won) {
+                _nextLevelId = _currentLevelId + 1;
+                if(_nextLevelId >= Levels.Length) {
+                    _nextLevelId = 0;
+                }
+                _currentLevelId = -1;
 
+                node.GetTree().ChangeScene("res://Success.tscn");
+            } else {
+                _nextLevelId = _currentLevelId;
+                _currentLevelId = -1;
+                node.GetTree().ChangeScene("res://DeadSplash.tscn");
+            }
+        } else {
+            LoadLevel(node, _nextLevelId);
+        }
+    }
+
+    private void LoadLevel(Node node, int nextLevelId){
+        _currentLevelId = nextLevelId;
+        node.GetTree().ChangeScene("res://" + Levels[nextLevelId] + ".tscn");
+    }
+
+    internal void Reset(Node node) {
+        LoadLevel(node, _currentLevelId);
+    }
 }
 
 public class World : Node2D
@@ -35,7 +64,6 @@ public class World : Node2D
         public Vector2 WorldPosition {get;set;}
         public Point GridPosition {get;set;}
         public int CellIndex {get;set;}
-
         public FireLocation(Vector2 worldPos, Point gridPos, int tileIndex) {
             this.WorldPosition = worldPos;
             this.CellIndex = tileIndex;
@@ -125,13 +153,11 @@ public class World : Node2D
         FlatGrid().Where(ShouldBurn).ForEach(SpawnFaia);
 
         if (FlatGrid().Where(IsNotWall).All(IsBurning)) {
-            Settings.Instance.SceneAfterNextScene = "res://World.tscn";   // dumm
-            GetTree().ChangeScene("res://DeadSplash.tscn");
+            Levelator.Instance.NextLevel(this, false);
         }
 
         if (!FlatGrid().Any(IsBurning)) {
-            Settings.Instance.SceneAfterNextScene = "res://World.tscn";
-            GetTree().ChangeScene("res://Success.tscn");
+            Levelator.Instance.NextLevel(this);
         }
     }
 
@@ -166,12 +192,17 @@ public class World : Node2D
 
     private static bool IsBurning(CellInfo info) => info.HasFire;
 
-    private static bool IsNotWall(CellInfo info) => info.CellType != CellTypes.Wall;
+    private static bool IsNotWall(CellInfo info) => info.CellType != CellTypes.Wall && info.CellType != CellTypes.Empty;
 
     private static Func<CellInfo, bool> IsCellType(CellTypes t) => (c) => c.CellType == t;
 
     private static bool ShouldBurn(CellInfo cell) => cell.Heat >= 100 && !cell.HasFire;
 
+    public override void _Input(InputEvent @event) {
+        if(@event.IsActionPressed("reset")) {
+            Levelator.Instance.Reset(this);
+        }
+    }
 }
 
 public static class Extensions {

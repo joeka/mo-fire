@@ -18,7 +18,7 @@ public class DeadSplash : Node2D
         if (@event is InputEventKey) {
             var k = (InputEventKey)@event;
             if (k.IsPressed() && !k.IsEcho()) {
-                GetTree().ChangeScene(Settings.Instance.SceneAfterNextScene);
+                Levelator.Instance.NextLevel(this);
             }
         }
     }
