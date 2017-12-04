@@ -15,8 +15,11 @@ public class DeadSplash : Node2D
     }
 
     public override void _Input(InputEvent @event) {
-        if (@event is InputEventKey k && k.IsPressed() && !k.IsEcho()) {
-            GetTree().ChangeScene(Settings.Instance.SceneAfterNextScene);
+        if (@event is InputEventKey) {
+            var k = (InputEventKey)@event;
+            if (k.IsPressed() && !k.IsEcho()) {
+                GetTree().ChangeScene(Settings.Instance.SceneAfterNextScene);
+            }
         }
     }
 

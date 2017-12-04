@@ -29,7 +29,8 @@ public class WaterCannon : Particles2D {
         var olapAreas = area.GetOverlappingAreas().Select(t => (Area2D)t).ToArray();
 
         foreach (var olap in olapAreas) {
-            if (olap.GetParent() is Faia f) {
+            if (olap.GetParent() is Faia) {
+                var f = (Faia)olap.GetParent();
                 f.Extinguish((int)(delta*WaterPower));
             }   
         }
